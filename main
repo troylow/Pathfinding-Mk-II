@@ -1,9 +1,17 @@
 #include <iostream>
-#include "map.h"
-#include <vector>
+#include "Map.h"
+#define EMPTY 0
+#define BLOCKED 1
 
 
 int main() {
-Map m;
-m.find(4,2);
+  int maze[5][5] = {
+      { 0, 0, 0, 0, 0},
+      { 0, 0, 1, 0, 0},
+      { 0, 1, 0, 1, 0},
+      { 0, 1, 0, 1, 0},
+      { 2, 1, 0, 0, 0},
+    };
+  Map m(maze);
+  m.find(4,2);
 }
