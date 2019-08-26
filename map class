@@ -1,0 +1,29 @@
+#pragma once
+#include <vector>
+
+#define EMPTY 0
+#define BLOCK 1
+#define EXIT 2
+#define ENTRANCE 3
+#define SHOP 4
+#define MONSTER 5
+#define NOT_VISITED 0
+#define VISITED 1
+
+using namespace std;
+
+class Map{
+  private:
+    int map[5][5];
+    int visited[5][5];
+    vector<int> deck;
+    
+
+  public:
+    Map();
+    bool isValid(int x,int y);
+    bool isVisited(int x,int y);
+    bool canVisit(int x,int y);
+    bool isNotBlocked(int x,int y);
+    bool find(int x,int y);
+};
