@@ -1,36 +1,33 @@
+#include "Map.h"
 #include <iostream>
-#include "map.h"
-#include <experimental/random>
-#include <vector>
 using namespace std;
 
-Map::Map()
-{
- //initalize visited
- for (int i=0;i<5;i++)
- { for (int j=0;j<5;j++)
-  {
-  visited[i][j]= NOT_VISITED;
-}
- }
+Map::Map(int theMap[5][5]) {
+
+  // initialize visited
+  for (int i=0; i < 5; i++) {
+    for (int j=0; j < 5; j++) {
+      map[i][j] = theMap[i][j];
+      visited[i][j] = NOT_VISITED;
+    }
+  }
 }
 
-bool Map::isValid(int x, int y)
+bool Map::isValid(int x, int y) 
 {
-  if (x<0 || x>4)
-  {
+  if (x < 0 || x > 4) {
     return false;
   }
-  if (y<0 || y>4)
-  {
+
+  if (y < 0 || y > 4) {
     return false;
   }
   return true;
 }
 
 bool Map::isVisited(int x, int y) {
-    if (visited[x][y] == VISITED) 
-    {     
+    if (visited[x][y] == VISITED) {
+     
       return true;
     }
     return false;
@@ -38,32 +35,34 @@ bool Map::isVisited(int x, int y) {
 
 bool Map::isNotBlocked(int x, int y) {
   return map[x][y] == EMPTY || map[x][y] == EXIT;
+
+}
+bool Map::canVisit(int x, int y) {
+  return isValid(x, y) && !isVisited(x, y) && isNotBlocked(x,y);
 }
 
-bool Map::canVisit(int x,int y){
- return isValid(x,y) && !isVisited(x,y) && isNotBlocked(x,y);
-}
+bool Map::find(int x, int y) {
 
-bool Map::find(int x,int y){
-  cout << "Visitng " << x << y << endl;
+  cout << "Visiting " << x << ", " << y << endl;
 
-  //Base Case
-  if (map[x][y]==EXIT)
-  {
-    cout << "EXITED AT " << x << y << endl;
+  // base case
+  if (map[x][y] == EXIT) {
+    cout << "EXITED AT " << x << ", " << y << endl;
     return true;
   }
 
   visited[x][y] = VISITED;
 
+  // walk up
   if (canVisit(x-1, y)) {
+  
     if (find(x-1, y)) {
       cout << x-1 << ", " << y << endl;
       return true;
     }
   }
 
-  // walk right
+  // walk left
   if (canVisit(x, y+1)) {
     if (find(x, y+1)) {
       cout << x << ", " << y+1 << endl;
