@@ -1,0 +1,9 @@
+#include <iostream>
+#include "map.h"
+#include <vector>
+
+
+int main() {
+Map m;
+m.find(4,2);
+}
